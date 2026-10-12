@@ -1,7 +1,7 @@
-import '@fontsource/nunito/500.css';
-import '@fontsource/nunito/700.css';
-import '@fontsource/fraunces/600.css';
-import '@fontsource/caveat/600.css';
+import '@fontsource/nunito/latin-500.css';
+import '@fontsource/nunito/latin-700.css';
+import '@fontsource/fraunces/latin-600.css';
+import '@fontsource/caveat/latin-600.css';
 import './styles.css';
 
 import { $, esc, show } from './core/util';
