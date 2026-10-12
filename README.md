@@ -2,6 +2,8 @@
 
 A cozy hopping game where every answer you write grows into a flower, alone or with the people you care about.
 
+**Play:** https://plant-a-thought.vercel.app (works on any phone or computer; install it from the home screen to play offline).
+
 - **Calm walk** (default): no timers, no losing. A question every 5 islands.
 - **Today’s question**: everyone gets the same question and the same islands each day. Share a card when you finish.
 - **Climb**: islands crumble, flyers swoop, combos and missions. A question every 10 islands.
