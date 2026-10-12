@@ -4,8 +4,9 @@ A cozy hopping game. **Thought mode** is calm: land on an island, plant a word, 
 **Dodge mode** is the challenge: hop over what your animal hates, climb ledges, grab power-ups.
 Play solo, or with a friend using a 4-letter room code like `MOSS-42`.
 
-- **Android:** download the APK from the [latest release](../../releases/latest).
-- **iPhone, Mac, Windows, Linux:** play in the browser (GitHub Pages link in the repo's About box).
+- **Play:** https://itsharshhy.github.io/plant-a-thought/ on any phone, tablet or computer.
+- **Install it like an app:** tap **📲 Install the game** on the home screen (Android, Chrome, Edge).
+  On iPhone/iPad: open it in Safari, tap **Share**, then **Add to Home Screen**. It works offline after the first visit.
 
 ## Set up (about 10 minutes)
 
@@ -21,19 +22,12 @@ Without these two values the game still works, but rooms only connect tabs in on
 Settings > Pages > **Deploy from a branch** > `main` / `(root)` > Save.
 Your game is then at `https://YOUR-USERNAME.github.io/YOUR-REPO/`.
 
-### 3. Android APK
-1. In `config.js`, set `apkUrl` to
-   `https://github.com/YOUR-USERNAME/YOUR-REPO/releases/latest/download/PlantAThought.apk`
-   (this makes a download button appear for Android visitors on the web version).
-2. Go to **Releases > Draft a new release**, create the tag `v1.0.0`, and publish.
-3. The **Build Android APK** action runs (about 5 to 10 minutes) and attaches `PlantAThought.apk` to the release.
-4. On the phone: download the APK, open it, and allow "Install unknown apps" for your browser when asked.
-
-The APK is debug-signed, which is fine for sharing directly. For the Play Store you would add a release signing key.
+### 3. Installable app (PWA)
+Nothing to set up. `manifest.webmanifest` and `sw.js` make the web version installable and playable offline.
 
 ## Run locally
     python3 -m http.server 8080   # then open http://localhost:8080
 
 ## Files
 `index.html` the whole game, `config.js` your settings, `vendor/supabase.js` the realtime client,
-`icons/` and `assets/` app icons, `capacitor.config.json` + `package.json` + `.github/workflows/android.yml` the Android build.
+`icons/` app icons, `manifest.webmanifest` + `sw.js` the installable app (PWA).

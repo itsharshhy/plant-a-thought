@@ -5,7 +5,7 @@
 <meta name="description" content="A cozy co-op hopping game. Plant a word, grow a world.">
 <meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Plant a Thought">
-<link rel="icon" href="icons/icon-192.png"><link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" href="icons/icon-192.png"><link rel="apple-touch-icon" href="icons/icon-180.png"><link rel="manifest" href="manifest.webmanifest">
 <script src="config.js"></script>
 <title>Plant a Thought</title>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fraunces:wght@600&family=Nunito:wght@500;700&display=swap" rel="stylesheet">
@@ -60,7 +60,7 @@ input,textarea{-webkit-user-select:text;user-select:text}
   <button id="host" class="ghost">Host a world</button>
   <div class="row"><input id="code" maxlength="7" placeholder="Enter room code" aria-label="Room code"><button id="join">Join</button></div>
   <button id="cust" class="ghost">Customize</button>
-  <button id="getapp" class="ghost hide" style="font-weight:800">⬇ Get the Android app</button>
+  <button id="getapp" class="ghost hide" style="font-weight:800">📲 Install the game</button>
   <p id="msg"></p>
 </div>
 <div id="custom" class="glass panel hide">
@@ -348,9 +348,17 @@ function dodgeFrame(dt){if(!dOver){dT+=dt;genOb(dT+4)}
 function vib(n){try{navigator.vibrate&&navigator.vibrate(n)}catch(e){}}
 function kbLift(){const v=window.visualViewport;if(!v)return;const k=Math.max(0,innerHeight-v.height-v.offsetTop);$('#typeBox').style.bottom=k>50?(k+10)+'px':''}
 if(window.visualViewport){visualViewport.addEventListener('resize',kbLift);visualViewport.addEventListener('scroll',kbLift)}
-const inApp=()=>(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform())||/; wv\)/.test(navigator.userAgent),apkUrl=(window.PAT_CONFIG||{}).apkUrl;
-if(/Android/i.test(navigator.userAgent)&&!inApp()&&apkUrl)$('#getapp').classList.remove('hide');
-$('#getapp').onclick=()=>{location.href=apkUrl};
+const inApp=()=>(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform())||/; wv\)/.test(navigator.userAgent);
+const installed=()=>matchMedia('(display-mode: fullscreen), (display-mode: standalone)').matches||navigator.standalone===true;
+const isIOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+let installEv=null;
+if('serviceWorker' in navigator&&!inApp()&&(location.protocol==='https:'||location.hostname==='localhost'))addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+if(isIOS&&!installed()&&!inApp())$('#getapp').classList.remove('hide');
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEv=e;if(!inApp())$('#getapp').classList.remove('hide')});
+addEventListener('appinstalled',()=>{installEv=null;$('#getapp').classList.add('hide')});
+$('#getapp').onclick=async()=>{
+ if(installEv){installEv.prompt();const r=await installEv.userChoice;installEv=null;if(r.outcome==='accepted')$('#getapp').classList.add('hide');return}
+ $('#msg').textContent=isIOS?'In Safari, tap the Share button ⬆ then "Add to Home Screen".':'Open your browser menu and choose "Install app" or "Add to Home screen".'};
 let lives=3,lMax=3,ff=0,ffGot=new Set(),thOver=false,lastTick=0;
 const crumbleTime=j=>j<3?9999:Math.max(1.6,4.5-j*.04),hasFF=j=>j>0&&rng(seed+j*31)()>.55;
 function crumbDraw(s,i){const near=(b)=>b&&b.isl===i&&b.ct&&b.st==='stand'&&b.ct-T<1.5&&b.ct>T,sh=near(me)?(1.5-(me.ct-T))*4:(near(pb)?(1.5-(pb.ct-T))*4:0);

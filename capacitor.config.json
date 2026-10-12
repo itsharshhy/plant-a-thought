@@ -1,6 +1,0 @@
-{
-  "appId": "com.plantathought.app",
-  "appName": "Plant a Thought",
-  "webDir": "www",
-  "server": { "androidScheme": "https" }
-}
