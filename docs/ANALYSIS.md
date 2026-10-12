@@ -1,5 +1,7 @@
 # Plant a Thought: honest product and code review
 
+> **Status (v2):** everything below has been built: all bugs fixed (with tests), and every feature in the ranked list shipped, except that Dodge was kept as a side mini-game rather than cut. See the README for what exists now. Kept as the record of why.
+
 Reviewed 2026-10-12 against commit `a3c499e`. Numbers below were measured in headless Chromium, not guessed.
 
 ## Verdict in one paragraph
@@ -39,7 +41,7 @@ Pick reflection. Keep the hopping as the gentle, no-fail way you move between th
 3. **Async shared gardens (most important).** A garden link for a couple, friend group, family, class or team. Each person plants when they want; the garden grows over days. Real-time 2-player needs both people online at the same moment, which is why it will never take off. Needs a Supabase table (garden, author, word, mood, day), not just Broadcast.
 4. **Persistent personal garden and journal.** Save locally first (`localStorage`/IndexedDB), with export. Gentle streaks ("your garden has 12 flowers"), never punishing ones.
 5. **Group rooms of 3 to 30 with a host.** Unlocks real use cases: classroom SEL check-ins, team retros and stand-ups, therapy and support groups, family check-ins. The host chooses the prompt pack and whether answers are anonymous. This is the only plausible path to revenue (schools, teams).
-6. **Prompt packs and community prompts.** Fixes "questions are limited": packs (Gratitude, Couples, Team retro, Kids, Exam stress), languages (Hindi first if your audience is Indian), and user-submitted prompts with moderation.
+6. **Prompt packs and community prompts.** Fixes "questions are limited": packs (Gratitude, Couples, Team retro, Kids, Exam stress), languages (Hindi and English first), and user-submitted prompts with moderation.
 7. **Calm mode (no-fail).** No crumbling, no hearts. Prompt every 3 to 5 islands, not 20. Make it the default.
 8. **"Water a friend's flower" reactions.** A one-tap kindness reaction on someone's thought in a shared garden. Low effort, high warmth, no comment threads to moderate.
 
